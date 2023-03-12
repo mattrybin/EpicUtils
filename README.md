@@ -5,7 +5,7 @@
 
 <br />
 
-# EpicUtils - Utils that makes you more productive
+# EpicUtils
 
 [EpicUtils](https://marketplace.visualstudio.com/items?itemName=MattRybin.epic-utils) is an [open-source](https://github.com/mattrybin/EpicUtils) extension for [Visual Studio Code](https://code.visualstudio.com).
 
