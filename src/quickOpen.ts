@@ -2,7 +2,8 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
+import * as R from "ramda"
+import * as RA from "ramda-adjunct"
 import * as path from 'path';
 import * as cp from 'child_process';
 import { Uri, window, Disposable } from 'vscode';
@@ -46,25 +47,47 @@ class MessageItem implements QuickPickItem {
 	}
 }
 
+const gitFilesChanged = ({ branch = "origin/develop", cwd }: Record<string, string>) => {
+	try {
+		const data = cp.execSync(`git diff --diff-filter=MARC --name-only \`git merge-base ${branch} HEAD\``, { cwd })
+		return R.pipe(
+			(x) => x.toString(),
+			(x) => x.split('\n'),
+			RA.compact,
+			// R.tap(x => console.log(path.basename(x[0] as any))),
+			R.sortBy(R.pipe(path.basename, R.length)),
+			R.tap(x => console.log(x)) as any,
+			R.map((relative: string) => new FileItem(Uri.file(cwd), Uri.file(path.join(cwd, relative)))),
+		)(data)
+	} catch (err) {
+		console.error(err)
+	}
+}
+
 async function pickFile() {
 	const disposables: Disposable[] = [];
 	try {
 		return await new Promise<Uri | undefined>((resolve, reject) => {
 			const input = window.createQuickPick<FileItem | MessageItem>();
-			input.placeholder = 'Type to search for files';
+			input.placeholder = 'EpicUtils: Search file by name';
+			const dummyCwd = '/Users/mattrybin/SOFTWARE/turboplan'
 			let rgs: cp.ChildProcess[] = [];
+			const output = gitFilesChanged({ cwd: dummyCwd })
+			input.items = output as any
 			disposables.push(
 				input.onDidChangeValue(value => {
 					rgs.forEach(rg => rg.kill());
-					if (!value) {
+					if (!value || value.length <= 1) {
 						input.items = [];
 						return;
 					}
 					input.busy = true;
 					const cwds = workspace.workspaceFolders ? workspace.workspaceFolders.map(f => f.uri.fsPath) : [process.cwd()];
+					console.log(cwds)
 					const q = process.platform === 'win32' ? '"' : '\'';
 					rgs = cwds.map(cwd => {
 						const rg = cp.exec(`rg --files -g ${q}*${value}*${q}`, { cwd }, (err, stdout) => {
+							console.log(stdout)
 							const i = rgs.indexOf(rg);
 							if (i !== -1) {
 								if (rgs.length === cwds.length) {

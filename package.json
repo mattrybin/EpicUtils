@@ -1,15 +1,17 @@
 {
-	"name": "quickinput-sample",
-	"displayName": "QuickInput Sample",
-	"description": "Samples for VS Code's QuickInput API",
-	"version": "0.0.1",
-	"publisher": "vscode-samples",
-	"private": true,
-	"license": "MIT",
+	"name": "epic-utils",
+	"displayName": "EpicUtils",
+	"description": "VS Code Utils that makes your more productive.",
+	"version": "1.0.0",
+	"publisher": "MattRybin",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/mattrybin/EpicUtils"
 	},
+	"keywords": [
+		"utils",
+		"code-review"
+	],
 	"engines": {
 		"vscode": "^1.73.0"
 	},
@@ -17,7 +19,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:samples.quickInput"
+		"onCommand:EpicUtils.changed-files-navigator"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -41,5 +43,10 @@
 		"@typescript-eslint/parser": "^5.42.0",
 		"eslint": "^8.26.0",
 		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"@types/ramda": "^0.28.23",
+		"ramda": "^0.28.0",
+		"ramda-adjunct": "^3.4.0"
 	}
 }
