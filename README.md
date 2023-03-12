@@ -5,4 +5,4 @@
 
 <br />
 
-# EpicUtils - VS Code utils that makes you more productive
+# EpicUtils - VSC utils that makes you more productive
