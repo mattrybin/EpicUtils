@@ -2,7 +2,7 @@
 	"name": "epic-utils",
 	"displayName": "EpicUtils",
 	"description": "VS Code Utils that makes your more productive.",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "MattRybin",
 	"repository": {
 		"type": "git",
