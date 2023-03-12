@@ -5,4 +5,4 @@
 
 <br />
 
-# EpicUtils - VSC utils that makes you more productive
+# EpicUtils - Utils that makes you more productive
