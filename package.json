@@ -2,7 +2,7 @@
 	"name": "epic-utils",
 	"displayName": "EpicUtils",
 	"description": "VS Code Utils that makes your more productive.",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"publisher": "MattRybin",
 	"icon": "assets/logo.png",
 	"repository": {
@@ -20,16 +20,35 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:EpicUtils.changed-file-navigator"
+		"onCommand:EpicUtils.changedFileNavigator"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "EpicUtils.changed-file-navigator",
-				"title": "EpicUtils: Changed File Navigator"
+				"command": "EpicUtils.changedFileNavigator",
+				"title": "Changed File Navigator",
+				"category": "EpicUtils"
 			}
-		]
+		],
+		"configuration": {
+			"title": "EpicUtils",
+			"properties": {
+				"EpicUtils.changedFileNavigator.parentBranch": {
+					"type": "string",
+					"default": "master",
+					"description": "The parent branch to check against"
+				},
+				"typescript.tsdk": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": null,
+					"description": "Specifies the folder path containing the tsserver and lib*.d.ts files to use."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
