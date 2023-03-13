@@ -6,10 +6,12 @@ import * as R from "ramda"
 import * as RA from "ramda-adjunct"
 import * as path from 'path';
 import * as cp from 'child_process';
-import { Uri, window, Disposable } from 'vscode';
+import { workspace, Uri, window, Disposable } from 'vscode';
 import { QuickPickItem } from 'vscode';
-import { workspace } from 'vscode';
 
+const { changedFileNavigator } = workspace.getConfiguration('EpicUtils')
+
+console.log("CHANGED", changedFileNavigator)
 /**
  * A file opener using window.createQuickPick().
  * 
@@ -72,7 +74,7 @@ async function pickFile() {
 			input.placeholder = 'EpicUtils: Search file by name';
 			const dummyCwd = '/Users/mattrybin/SOFTWARE/turboplan'
 			let rgs: cp.ChildProcess[] = [];
-			const output = gitFilesChanged({ cwd: dummyCwd })
+			const output = gitFilesChanged({ cwd: dummyCwd, branch: changedFileNavigator.parentBranch })
 			input.items = output as any
 			disposables.push(
 				input.onDidChangeValue(value => {
