@@ -20,14 +20,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:EpicUtils.changed-files-navigator"
+		"onCommand:EpicUtils.changed-file-navigator"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "samples.quickInput",
-				"title": "Quick Input Samples"
+				"command": "EpicUtils.changed-file-navigator",
+				"title": "EpicUtils: Changed File Navigator"
 			}
 		]
 	},
