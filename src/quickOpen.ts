@@ -72,9 +72,9 @@ async function pickFile() {
 		return await new Promise<Uri | undefined>((resolve, reject) => {
 			const input = window.createQuickPick<FileItem | MessageItem>();
 			input.placeholder = 'EpicUtils: Search file by name';
-			const dummyCwd = '/Users/mattrybin/SOFTWARE/turboplan'
+			const cwds = workspace.workspaceFolders ? workspace.workspaceFolders.map(f => f.uri.fsPath) : [process.cwd()];
 			let rgs: cp.ChildProcess[] = [];
-			const output = gitFilesChanged({ cwd: dummyCwd, branch: changedFileNavigator.parentBranch })
+			const output = gitFilesChanged({ cwd: cwds[0], branch: changedFileNavigator.parentBranch })
 			input.items = output as any
 			disposables.push(
 				input.onDidChangeValue(value => {
