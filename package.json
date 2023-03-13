@@ -38,14 +38,6 @@
 					"type": "string",
 					"default": "master",
 					"description": "The parent branch to check against"
-				},
-				"typescript.tsdk": {
-					"type": [
-						"string",
-						"null"
-					],
-					"default": null,
-					"description": "Specifies the folder path containing the tsserver and lib*.d.ts files to use."
 				}
 			}
 		}
